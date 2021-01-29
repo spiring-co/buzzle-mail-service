@@ -1,7 +1,6 @@
 var amqp = require("amqplib/callback_api");
 require("dotenv").config();
 
-const amqp = require("amqplib");
 const url = process.env.AMQP_URL;
 const exchange = "buzzle-test";
 const queueCreator = "buzzle-test";
@@ -50,12 +49,7 @@ amqp.connect(
 
           channel.consume(
             q.queue,
-            function (msg) {
-              if (msg.content) {
-                setTimeout(() => {
-                  console.log(msg.content.toString());
-                }, 5000);
-              }
+            async function (msg) {
               const { data, eventType } = JSON.parse(msg.content.toString());
               console.log(data, eventType);
               switch (eventType) {
@@ -102,6 +96,7 @@ amqp.connect(
                     subject: "account deleted",
                     text: "Your account has been deleted",
                   });
+              }
               console.log(
                 " [x] %s: '%s'",
                 msg.fields.routingKey,
