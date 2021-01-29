@@ -12,6 +12,9 @@
     "@sendgrid/mail": "^7.4.1",
     "amqplib": "^0.6.0",
     "dotenv": "^8.2.0",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6",
+    "mustache": "^4.1.0",
     "twilio": "^3.55.0"
   }
 }

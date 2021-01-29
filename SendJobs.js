@@ -11,7 +11,7 @@ amqp.connect(
         throw error1;
       }
 
-      var queue = "task_queue";
+      var queue = "buzzle-creators";
       var msg = "job:state:error:job id";
 
       // var msg = {
@@ -21,12 +21,25 @@ amqp.connect(
       //     data: { email: "shivam.119966@yahoo.com" },
       //   };
 
-      channel.assertQueue(queue, {
-        durable: true,
-      });
-      channel.sendToQueue(queue, Buffer.from(msg), {
-        persistent: true,
-      });
+      // channel.assertQueue("buzzle-creators", {
+      //   durable: true,
+      // });
+      channel.sendToQueue(
+        "buzzle-creators",
+        Buffer.from(
+          JSON.stringify({
+            data: {
+              adminPushTokens: [
+                "cUosg6jzoVdSxyHA0zUnRp:APA91bFzc0NoLzhJh1CBDowotAeB4eJ8jYnf7aTwT363TZaOUtFhPB7G9wsvwK7bd2vOyphbB_fkMyoORryfZ05jkmwL36BZ-4UhDgS0FncOtwd4KNzJof3QfhknNQVAbYC1rhqiMBDm",
+              ],
+            },
+            eventType: "created",
+          })
+        ),
+        {
+          persistent: true,
+        }
+      );
       console.log(" [x] Sent '%s'", msg);
     });
   }
