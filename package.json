@@ -1,20 +1,30 @@
 {
-  "name": "emaileventmanager",
+  "name": "buzzle-mail-service",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "start": "node dist/app.js",
+    "postinstall": "npm run tsc",
+    "watch-node": "nodemon dist/app.js",
+    "watch-ts": "tsc -w",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
-  "author": "",
+  "author": "Harsh Bhatia",
   "license": "ISC",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.1",
+    "@sendgrid/mail": "^7.4.2",
     "amqplib": "^0.6.0",
     "dotenv": "^8.2.0",
-    "express-handlebars": "^5.2.0",
-    "handlebars": "^4.7.6",
-    "mustache": "^4.1.0",
-    "twilio": "^3.55.0"
+    "lodash": "^4.17.21",
+    "mustache": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.17",
+    "@types/lodash": "^4.14.168",
+    "@types/mustache": "^4.1.1",
+    "@types/node": "^14.14.22",
+    "typescript": "^4.1.3"
   }
 }
